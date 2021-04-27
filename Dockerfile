@@ -2,6 +2,9 @@ FROM debian:latest
 
 LABEL maintainer="@Mind-Surfer" license="Apache License, Version 2.0"
 
+#Defaults to Google's DNS Servers
+ENV DNS_SERVER1="8.8.8.8" DNS_SERVER2="8.8.4.4"
+
 COPY build/ /build/
 COPY run/ /run/
 
