@@ -59,14 +59,14 @@ The basic mode of operation when the container is started is as follows: -
 
 #### Docker run
 
-`docker run --name qbittorrent \
-    -d \
-    -it \
-    --device=/dev/net/tun \
-    --cap-add=NET_ADMIN \
-    -p 8080:8080 \
-    -v ~/Downloads/Movies:/torrents/ \
-    -v ~/qbittorrent:/config/ \
+`docker run --name qbittorrent
+    -d
+    -it
+    --device=/dev/net/tun
+    --cap-add=NET_ADMIN
+    -p 8080:8080
+    -v ~/Downloads/Movies:/torrents/
+    -v ~/qbittorrent:/config/
     mindsurfer/qbittorrent:latest`
 
 #### Paramater Notes
