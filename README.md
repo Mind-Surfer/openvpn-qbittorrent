@@ -19,7 +19,7 @@ The following text outlines the requirements that must be fulfilled in order to 
 You need two directories on the host: -
 
 1. A configuration directory
-   1. This directory is going to host you qBittorrent configuration and your OpenVPN configuration file
+   1. This directory is going to hold your qBittorrent configuration and your OpenVPN configuration file
 2. A torrent directory
    1. As implied, this directory will hold your torrent files
 
@@ -33,7 +33,7 @@ You need two directories on the host: -
 Example:
 
 1. I create a folder called qBittorrent in my home folder
-2. I save my Open VP configuration file saving it into the qBittorrent folder that I just created in the previous step
+2. I save my Open VP configuration file into the qBittorrent folder created in the previous step
 
 ### qBittorrent Web UI TCP/IP Port Mapping
 
@@ -57,6 +57,15 @@ The basic mode of operation when the container is started is as follows: -
 2. When OpenVPN has established it's connection, qBittorrent will be started.
 3. If OpenVPN loses its connection for whatever reason, the container will stop to prevent information leakage.
 
+Optional environment variables: -
+
+* DNS_SERVER1
+  * A valid TCP/IP address of the DNS server you want to use.
+* DNS_SERVER2
+  * A valid TCP/IP address of the DNS server you want to use.
+
+If not specified, they default to using Google's public DNS servers (8.8.8.8, 8.8.4.4)
+
 #### Docker run
 
 `docker run --name qbittorrent
@@ -65,6 +74,8 @@ The basic mode of operation when the container is started is as follows: -
     --device=/dev/net/tun
     --cap-add=NET_ADMIN
     -p 8080:8080
+    -e DNS_SERVER2="8.8.8.8"
+    -e DNS_SERVER2="8.8.4.4"
     -v ~/Downloads/Movies:/torrents/
     -v ~/qbittorrent:/config/
     mindsurfer/qbittorrent:latest`
