@@ -57,6 +57,15 @@ The basic mode of operation when the container is started is as follows: -
 2. When OpenVPN has established it's connection, qBittorrent will be started.
 3. If OpenVPN loses its connection for whatever reason, the container will stop to prevent information leakage.
 
+Optional environment variables: -
+
+* DNS_SERVER1
+  * A valid TCP/IP address of the DNS server you want to use.
+* DNS_SERVER2
+  * A valid TCP/IP address of the DNS server you want to use.
+
+If not specified, they default to using Google's public DNS servers (8.8.8.8, 8.8.4.4)
+
 #### Docker run
 
 `docker run --name qbittorrent
@@ -65,6 +74,8 @@ The basic mode of operation when the container is started is as follows: -
     --device=/dev/net/tun
     --cap-add=NET_ADMIN
     -p 8080:8080
+    -e DNS_SERVER2="8.8.8.8"
+    -e DNS_SERVER2="8.8.4.4"
     -v ~/Downloads/Movies:/torrents/
     -v ~/qbittorrent:/config/
     mindsurfer/qbittorrent:latest`

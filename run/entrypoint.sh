@@ -1,29 +1,10 @@
 #!/bin/sh
 
-function valid_ip()
-{
-     #I got this from here https://www.linuxjournal.com/content/validating-ip-address-bash-script
-     #By Mitch Frazier
-     local  ip=$1
-     local  stat=1
-
-     if [[ $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-          OIFS=$IFS
-          IFS='.'
-          ip=($ip)
-          IFS=$OIFS
-          [[ ${ip[0]} -le 255 && ${ip[1]} -le 255 \
-               && ${ip[2]} -le 255 && ${ip[3]} -le 255 ]]
-          stat=$?
-     fi
-     return $stat
-}
-
 #Validate our dns ip addresses 
-if [ ! $(valid_ip() $DNS_SERVER1) ] 
+if [ ! $(/run/isipvalid.sh $DNS_SERVER1) ] 
      then set $DNS_SERVER1="8.8.8.8" 
 fi
-if [ ! $(valid_ip() $DNS_SERVER2) ] 
+if [ ! $(/run/isipvalid.sh $DNS_SERVER2) ] 
      then set $DNS_SERVER2="8.8.4.4" 
 fi
 
@@ -70,21 +51,11 @@ openvpn --config /config/openvpn.conf \
      --down /run/vpndown.sh --log /config/openvpn.log
 
 #When the vpn is up, it will create this file. Then we can start the torrent client.
-declare -i timer
-timer=0
-until [ -f /run/up.vpn || timer > 60 ]
+until [ -f /run/up.vpn ]
 do
      echo "Waiting for vpn connection.."
      sleep 5
-     timer+=5
 done
-
-if [ ! -f /run/up.vpn ]
-     then
-          echo "Timed out waiting for vpn connection."
-          echo "Exiting.."
-          exit 2
-fi
 
 #Sleep again to make sure the connection is up and active before we go and do stuff
 sleep 5
@@ -92,6 +63,8 @@ sleep 5
 #Get the vpn address
 vpnip="$(python3 /run/getvpnip.py)"
 echo "VPN TCP/IP address: $vpnip"
+echo "DNS server 1: $DNS_SERVER1"
+echo "DNS server 2: $DNS_SERVER2"
 
 #Compare the private address and the vpn address
 #they should not be the same, if they are we exit
@@ -99,7 +72,7 @@ if [ $privateip = $vpnip ]
      then
           echo "Failed to connect to the VPN correctly."
           echo "Exiting to prevent information leakage.."
-          exit 3
+          exit 2
 fi
 
 sed -i 's/^Connection\\InterfaceAddress=.*$/Connection\\InterfaceAddress='"$vpnip"'/' /config/qBittorrent/config/qBittorrent.conf
