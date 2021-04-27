@@ -1,6 +1,6 @@
 # Debian OpenVPN and qBittorrent Container Image
 
-This is a very simple container that has OpenVPN and qBittorrent installed on the official latest debian base image. It was created for my specifically for my own use but it may also be useful to you too. I am aware that this container is restrictive, so if it's not suitable for you there are other images out there offering more flexible options using OpenVPN and Deluge. I just happen to like qBittorrent and wanted to try creating my own container :-).
+A very simple container that has OpenVPN and qBittorrent installed on the official latest debian base image. It was created for my specifically for my own use but it may also be useful to you too. I am aware that this container is restrictive, so if it's not suitable for you there are other images out there offering more flexible options using OpenVPN and Deluge. I just happen to like qBittorrent and wanted to try creating my own container :-).
 
 ## About OpenVPN
 
