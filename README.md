@@ -33,7 +33,7 @@ You need two directories on the host: -
 Example:
 
 1. I create a folder called qBittorrent in my home folder
-2. I save my Open VP configuration file saving it into the qBittorrent folder that I just created in the previous step
+2. I save my Open VP configuration file into the qBittorrent folder created in the previous step
 
 ### qBittorrent Web UI TCP/IP Port Mapping
 
