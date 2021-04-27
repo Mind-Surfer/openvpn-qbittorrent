@@ -19,7 +19,7 @@ The following text outlines the requirements that must be fulfilled in order to 
 You need two directories on the host: -
 
 1. A configuration directory
-   1. This directory is going to host you qBittorrent configuration and your OpenVPN configuration file
+   1. This directory is going to hold your qBittorrent configuration and your OpenVPN configuration file
 2. A torrent directory
    1. As implied, this directory will hold your torrent files
 
