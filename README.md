@@ -88,3 +88,13 @@ There are a couple of parameters that I would like to draw your attention too;
 * --cap-add=NET_ADMIN
 
 ***These parameters are required for OpenVPN to connect. Without them, OpenVPN will not connect.***
+
+### Accessing the qBittorrent Web UI
+
+When OpenVPN has established its connection, the local area network becomes inaccessible. This is by design because OpenVPN and your VPN provider use the same private address ranges that are in use on your local network. This unfortunately means that the qBittorrent Web UI is only accessible from the host (the machine where your container is running).
+
+You can read more about this [here](https://openvpn.net/community-resources/how-to/).
+
+### qBittorrent Web UI
+
+When you first run the container, qBittorrent is setup with the default user name and password (admin, adminadmin). I strongly advise you to change these to something more secure.
