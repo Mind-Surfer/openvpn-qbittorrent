@@ -42,7 +42,7 @@ jobs:
         context: ./
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/qbittorrent:${ env.CI_COMMIT_TAG }
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/qbittorrent:${ CI_COMMIT_TAG }
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
