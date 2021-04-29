@@ -1,13 +1,13 @@
-# This pipeline is used to incorporate security patches into the image
-# We cannot rely on changes to the code to include updates to the base image
-
-name: Docker CI Image Updates
+# This pipeline is used to push a beta release to Docker Hub
+# This will push a container image with the version number in the tag
+name: Docker CI Beta Release
 
 # Controls when the action will run. 
 on:
-  #Every sunday
-  schedule:
-    - cron: '0 4 16 * *'
+  push:
+    tags: v/[1-9]+.[0-9]+.[0-9]+/-beta
+    branches-ignore:
+      - 'master'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -42,7 +42,7 @@ jobs:
         context: ./
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/qbittorrent:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/qbittorrent:v2
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/qbittorrent:${ env.CI_COMMIT_TAG }
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
