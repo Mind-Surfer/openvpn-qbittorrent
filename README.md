@@ -98,3 +98,7 @@ You can read more about this [here](https://openvpn.net/community-resources/how-
 ### qBittorrent Web UI
 
 When you first run the container, qBittorrent is setup with the default user name and password (admin, adminadmin). I strongly advise you to change these to something more secure.
+
+If you appreciate my work, buy me coffee
+
+[![If you appreciate my work, buy me coffee](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9A8T62P8DDAMC)
