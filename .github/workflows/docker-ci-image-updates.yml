@@ -7,7 +7,7 @@ name: Docker CI Image Updates
 on:
   #Every sunday
   schedule:
-    - cron: '0 4 16 * *'
+    - cron: '0 4 * * 6'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -42,7 +42,7 @@ jobs:
         context: ./
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/qbittorrent:latest
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/qbittorrent:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/qbittorrent:v2
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
