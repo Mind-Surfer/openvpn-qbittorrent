@@ -9,11 +9,25 @@ COPY build/ /build/
 COPY run/ /run/
 
 ##Install our packages
-RUN chmod +x /build/setup.sh && \
+RUN apt-get update -y && apt-get upgrade -y && apt-get autoremove -y && \
+    echo "**** Installing OpenVPN and qBittorrent.. ****" && \
+    #Needed for OpenVPN
+    mkdir -p /dev/net && \
+    mknod /dev/net/tun c 10 200 && \
+    chmod 600 /dev/net/tun && \
+    #Now we can install the packages
+    apt-get install -y openvpn qbittorrent-nox python3 wget unzip && \
+    echo "**** Finished installing OpenVPN and qBittorrent. ****" && \
+    echo "**** Cleaning up.. ****" && \
+    apt-get clean && \
+    rm -rf \
+        /tmp/* \
+        /var/lib/apt/lists/* \
+        /var/tmp/* && \
+    echo "**** Finished cleaning up. ****" && \
     chmod +x /run/entrypoint.sh && \
     chmod +x /run/vpnup.sh && \
-    chmod +x /run/vpndown.sh && \
-    /build/setup.sh
+    chmod +x /run/vpndown.sh
 
 ##Open the web client port
 EXPOSE 8080/tcp
