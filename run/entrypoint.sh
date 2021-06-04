@@ -1,20 +1,12 @@
 #!/bin/sh
-
-#Validate our dns ip addresses 
-if [ ! $(/run/isipvalid.sh $DNS_SERVER1) ] 
-     then set $DNS_SERVER1="8.8.8.8" 
-fi
-if [ ! $(/run/isipvalid.sh $DNS_SERVER2) ] 
-     then set $DNS_SERVER2="8.8.4.4" 
-fi
+set -e
 
 #If the qBittorrent does not exist copy the default in
 #We may also need to create the dir structure too
-if [ ! -f /config/qBittorrent/config/qBittorrent.conf ]
+if [ ! -f /config/qBittorrent/config/qBittorrent.conf ];
      then
           echo "qBittorrent config does not exist, copying default config.."
-          mkdir /config/qBittorrent
-          mkdir /config/qBittorrent/config
+          mkdir -p /config/qBittorrent/config
           cp /build/default-config/qBittorrent.conf /config/qBittorrent/config/qBittorrent.conf
 else
      echo "qBittorrent config exists. "
@@ -23,13 +15,13 @@ fi
 #This one is not for the config but for the plugins which we're going to pull down
 #This makes it a bit easier to use because it saves clicking the check for updates button
 #whenever we start the container
-if [ ! -d /config/qBittorrent/data ]
+if [ ! -d /config/qBittorrent/data ];
      then
-          mkdir /config/qBittorrent/data
+          mkdir -p /config/qBittorrent/data
 fi
 
 #We check if the openvpn.conf exists - we can't connect without it!
-if [ ! -f /config/openvpn.conf ] 
+if [ ! -f /config/openvpn.conf ];
      then
           echo "Cannot find the VPN config file!"
           echo "Exiting.."
@@ -68,7 +60,7 @@ echo "DNS server 2: $DNS_SERVER2"
 
 #Compare the private address and the vpn address
 #they should not be the same, if they are we exit
-if [ $privateip = $vpnip ]
+if [ $privateip = $vpnip ];
      then
           echo "Failed to connect to the VPN correctly."
           echo "Exiting to prevent information leakage.."
@@ -76,7 +68,7 @@ if [ $privateip = $vpnip ]
 fi
 
 sed -i 's/^Connection\\InterfaceAddress=.*$/Connection\\InterfaceAddress='"$vpnip"'/' /config/qBittorrent/config/qBittorrent.conf
-
+#/etc/resolv.conf
 echo "VPN is up, Updating search plugins.."
 cd /config/qBittorrent/data/
 #Now we can go and get the default search plugins
@@ -88,6 +80,6 @@ rm master.zip && rm -r search-plugins-master
 cd /
 
 echo "starting qBittorrent.."
-qbittorrent-nox --profile=/config/
+exec "$@"
 
 exit 0
