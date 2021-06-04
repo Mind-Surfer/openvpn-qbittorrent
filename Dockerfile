@@ -11,7 +11,6 @@ COPY run/ /run/
 ##Install our packages
 RUN chmod +x /build/setup.sh && \
     chmod +x /run/entrypoint.sh && \
-    chmod +x /run/isipvalid.sh && \
     chmod +x /run/vpnup.sh && \
     chmod +x /run/vpndown.sh && \
     /build/setup.sh
