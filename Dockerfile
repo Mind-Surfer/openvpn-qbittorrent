@@ -21,4 +21,6 @@ EXPOSE 8080/tcp
 
 VOLUME [ "/config/", "/torrents/"]
 
-ENTRYPOINT exec /run/entrypoint.sh
+ENTRYPOINT [ "/run/entrypoint.sh" ]
+
+CMD [ "qbittorrent-nox", "--profile=/config/" ]
