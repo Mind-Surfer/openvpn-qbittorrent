@@ -8,16 +8,16 @@ echo "**** Installing OpenVPN and qBittorrent.. ****"
 mkdir -p /dev/net
 mknod /dev/net/tun c 10 200
 chmod 600 /dev/net/tun
-cat /dev/net/tun
+
 #Now we can install the packages
 apt-get install -y openvpn qbittorrent-nox python3 wget unzip
 
 echo "**** Finished installing OpenVPN and qBittorrent. ****"
 
-echo "**** Cleaningup.. ****"
+echo "**** Cleaning up.. ****"
 apt-get clean && \
 rm -rf \
     /tmp/* \
     /var/lib/apt/lists/* \
     /var/tmp/*
-echo "**** Finished cleaningup. ****"
+echo "**** Finished cleaning up. ****"
