@@ -10,6 +10,7 @@ if [ ! -f /config/qBittorrent/config/qBittorrent.conf ];
           cp /build/default-config/qBittorrent.conf /config/qBittorrent/config/qBittorrent.conf
 else
      echo "qBittorrent config exists. "
+     echo
 fi
 
 #This one is not for the config but for the plugins which we're going to pull down
@@ -30,11 +31,22 @@ fi
 
 #We need the private ip address so that we can compare it to the vpn ip and of course for informational purposes
 privateip="$(python3 /run/getprimaryip.py)"
-echo "Private TCP/IP address: $privateip"
 echo "Setting WebUI listener IP address.."
+echo "WebUI listener IP address is: $privateip"
+echo
 
 #we need the webui to be accessible externally to the host so change the listner to the local host ip
 sed -i 's/^WebUI\\Address=.*$/WebUI\\Address='"$privateip"'/' /config/qBittorrent/config/qBittorrent.conf
+
+echo "Setting DNS name servers.."
+echo
+NOW=$(date)
+echo "#DNS entries set $NOW" > /etc/resolv.conf
+echo "nameserver $DNS_SERVER1" >> /etc/resolv.conf
+echo "nameserver $DNS_SERVER2" >> /etc/resolv.conf
+echo "/etc/resolv.conf: -"
+cat /etc/resolv.conf
+echo
 
 echo "Connecting VPN.."
 openvpn --config /config/openvpn.conf \
@@ -55,8 +67,7 @@ sleep 5
 #Get the vpn address
 vpnip="$(python3 /run/getvpnip.py)"
 echo "VPN TCP/IP address: $vpnip"
-echo "DNS server 1: $DNS_SERVER1"
-echo "DNS server 2: $DNS_SERVER2"
+echo
 
 #Compare the private address and the vpn address
 #they should not be the same, if they are we exit
@@ -67,9 +78,10 @@ if [ $privateip = $vpnip ];
           exit 2
 fi
 
+echo "VPN is up! Configuring qBittorrent to use vpn interface.."
 sed -i 's/^Connection\\InterfaceAddress=.*$/Connection\\InterfaceAddress='"$vpnip"'/' /config/qBittorrent/config/qBittorrent.conf
-#/etc/resolv.conf
-echo "VPN is up, Updating search plugins.."
+
+echo "Updating search plugins.."
 cd /config/qBittorrent/data/
 #Now we can go and get the default search plugins
 wget https://github.com/qbittorrent/search-plugins/archive/refs/heads/master.zip
