@@ -25,6 +25,9 @@ jobs:
     - name: Check Out Repo 
       uses: actions/checkout@v2
 
+    - name: Get the tags and history
+      run: git fetch --prune --unshallow
+
     - name: Set env
       run: echo "RELEASE_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
       
