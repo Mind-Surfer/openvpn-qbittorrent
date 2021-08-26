@@ -16,7 +16,7 @@ RUN apk -U upgrade && \
     mknod /dev/net/tun c 10 200 && \
     chmod 600 /dev/net/tun && \
     #Now we can install the packages
-    apk add openvpn qbittorrent-nox python3 wget unzip && \
+    apk add openvpn python3 wget unzip su-exec && \
     echo "**** Finished installing OpenVPN and qBittorrent. ****" && \
     echo "**** Cleaning up.. ****" && \
     rm -rf \
@@ -26,7 +26,11 @@ RUN apk -U upgrade && \
     echo "**** Finished cleaning up. ****" && \
     chmod +x /run/entrypoint.sh && \
     chmod +x /run/vpnup.sh && \
-    chmod +x /run/vpndown.sh
+    chmod +x /run/vpndown.sh && \
+    chmod +x /run/run-qbittorrent.sh && \
+    chmod +x /build/install-qbittorrent.sh && \
+    adduser --u 1000 -D qbittorrent && \
+    /build/install-qbittorrent.sh
 
 ##Open the web client port
 EXPOSE 8080/tcp
@@ -35,4 +39,4 @@ VOLUME [ "/config/", "/torrents/"]
 
 ENTRYPOINT [ "/run/entrypoint.sh" ]
 
-CMD [ "qbittorrent-nox", "--profile=/config/" ]
+CMD [ "/run/run-qbittorrent.sh" ]
