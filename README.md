@@ -4,8 +4,8 @@ A very simple container that has OpenVPN and qBittorrent installed on the offici
 
 ## Tags
 
-- v2 is the latest version 
-- latest is, well.. the latest version (currently v2) 
+- v2 is the latest version
+- latest is, well.. the latest version (currently v2)
 
 ### Package and security updates
 
@@ -36,8 +36,8 @@ You need two directories on the host: -
 
 ### OpenVPN configuration file
 
-* The file must be named openvpn.conf (the name must all be lower case)
-* The file must be placed at the root of your configuration directory
+- The file must be named openvpn.conf (the name must all be lower case)
+- The file must be placed at the root of your configuration directory
 
 Example:
 
@@ -46,15 +46,15 @@ Example:
 
 ### qBittorrent Web UI TCP/IP Port Mapping
 
-* You must map a TCP/IP port 8080.
-  * i.e. using docker run, the port would be mapped like this -p 8080:8080
+- You must map a TCP/IP port 8080.
+  - i.e. using docker run, the port would be mapped like this -p 8080:8080
 
 ### Volume Mapping
 
 You must map two directories to that you have created on the host to the container:-
 
-* Map the directory that you created for the torrents to the container volume /torrents/
-* Map the directoty that you created for the configuration to the container volume /config/
+- Map the directory that you created for the torrents to the container volume /torrents/
+- Map the directoty that you created for the configuration to the container volume /config/
 
 ***The container requires read/write access to both volumes***
 
@@ -68,10 +68,10 @@ The basic mode of operation when the container is started is as follows: -
 
 Optional environment variables: -
 
-* DNS_SERVER1
-  * A valid TCP/IP address of the DNS server you want to use.
-* DNS_SERVER2
-  * A valid TCP/IP address of the DNS server you want to use.
+- DNS_SERVER1
+  - A valid TCP/IP address of the DNS server you want to use.
+- DNS_SERVER2
+  - A valid TCP/IP address of the DNS server you want to use.
 
 If not specified, they default to using Google's public DNS servers (8.8.8.8, 8.8.4.4)
 
@@ -93,8 +93,8 @@ If not specified, they default to using Google's public DNS servers (8.8.8.8, 8.
 
 There are a couple of parameters that I would like to draw your attention too;
 
-* --device=/dev/net/tun
-* --cap-add=NET_ADMIN
+- --device=/dev/net/tun
+- --cap-add=NET_ADMIN
 
 ***These parameters are required for OpenVPN to connect. Without them, OpenVPN will not connect.***
 
