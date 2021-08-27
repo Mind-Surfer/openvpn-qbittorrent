@@ -1,10 +1,10 @@
-# OpenVPN and qBittorrent #
+# qBittorrent #
 
 A very simple (and small!) container image with OpenVPN and qBittorrent installed on the official latest Alpine base image.
 
 ## Features ##
 
-* Works with any VPN provider that can provide a OpenVPN configuration file
+* Works with any VPN provider that provides OpenVPN configuration file
 * Configurable DNS Servers
 * Updated each week with relevant package and security updates
 * qBittorrent runs under a low privilage account
