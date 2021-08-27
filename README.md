@@ -29,7 +29,7 @@ OpenVPN is a virtual private network (VPN) system that implements techniques to 
 qBittorrent is a cross-platform free and open-source BitTorrent client.. [click here to see more info on wikipedia](https://en.wikipedia.org/wiki/QBittorrent)
 
 ***Note***
-There is no binary version of qBittorrent available in Alpine apk so we must use this one from [userdocs on GitHub](https://github.com/userdocs/qbittorrent-nox-static).
+Bittorrent is not available in qAlpine apk. So we use the latest version provided by [userdocs on GitHub](https://github.com/userdocs/qbittorrent-nox-static). License information can be found [here](https://github.com/userdocs/qbittorrent-nox-static/blob/master/LICENSE.txt).
 
 ## Tags ##
 
