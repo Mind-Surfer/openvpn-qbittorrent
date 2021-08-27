@@ -4,11 +4,12 @@ A very simple (and small!) container image with OpenVPN and qBittorrent installe
 
 ## Features ##
 
-* Works with any VPN provider that provides OpenVPN configuration file
+* Works with any VPN provider that provides an OpenVPN configuration file
 * Configurable DNS Servers
 * Updated each week with relevant package and security updates
 * qBittorrent runs under a low privilage account
 * Automatically updates qBittorrent search pluggins from [https://github.com/qbittorrent/search-plugins](https://github.com/qbittorrent/search-plugins) when the container starts
+* If OpenVPN loses its connection for whatever reason, the container will stop to prevent information leakage
 
 ## Base Image ##
 
