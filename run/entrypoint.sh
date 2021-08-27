@@ -51,7 +51,7 @@ sed -i 's/^WebUI\\Address=.*$/WebUI\\Address='"$privateip"'/' /config/qBittorren
 echo "Connecting VPN.."
 openvpn --config /config/openvpn.conf \
      --ping 10 --ping-exit 60 --daemon \
-     --script-security 2 --up-delay --up /run/vpnup.sh \
+     --script-security 2 --up-restart --up-delay --up /run/vpnup.sh \
      --down /run/vpndown.sh --log /config/openvpn.log
 
 # When the vpn is up, it will create this file. Then we can start the torrent client.
