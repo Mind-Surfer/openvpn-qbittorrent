@@ -1,6 +1,11 @@
 #!/bin/sh
 set -e
 
+# VPN connection timeout variable - defines the ammount of seconds we wait until we give up
+VPNWAITTIMEOUT=60
+# Defines the number of seconds we have waited for the VPN..
+VPNWAITSECONDS=0
+
 echo "Setting DNS name servers.."
 echo
 NOW=$(date)
@@ -57,8 +62,18 @@ openvpn --config /config/openvpn.conf \
 # When the vpn is up, it will create this file. Then we can start the torrent client.
 until [ -f /run/up.vpn ]
 do
-     echo "Waiting for vpn connection.."
-     sleep 5
+     VPNWAITSECONDS=$(( $VPNWAITSECONDS + 5 ))
+
+     if [ $VPNWAITSECONDS -eq $VPNWAITTIMEOUT ];
+          then
+               echo "Timeout connecting to VPN. Exiting.."
+               exit 2
+     else
+          sleep 5
+          echo "Waiting ${VPNWAITSECONDS} seconds for the vpn connection.."
+
+     fi
+
 done
 
 # Sleep again to make sure the connection is up and active before we go and do stuff
