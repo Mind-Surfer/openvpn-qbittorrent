@@ -34,12 +34,12 @@ There is no binary version of qBittorrent available in Alpine apk so we must use
 
 Tag     | Description
 :-------|:-----------------
-latest  | v2.5.0
-v2.5.0  | Alpine image base
-v2.4.0  | Debian image base
-v2.3.0  | Debian image base
-v2.2.0  | Debian image base
-v2.1.0  | Debian image base
+latest  | v2.1.0
+v2.1.0  | Alpine image base
+v2.0.4  | Debian image base
+v2.0.3  | Debian image base
+v2.0.2  | Debian image base
+v2.0.1  | Debian image base
 
 ## Package and Security Updates ##
 
