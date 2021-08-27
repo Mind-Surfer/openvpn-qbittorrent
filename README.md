@@ -8,6 +8,7 @@ A very simple (and small!) container image with OpenVPN and qBittorrent installe
 * Configurable DNS Servers
 * Updated each week with relevant package and security updates
 * qBittorrent runs under a low privilage account
+* Automatically updates qBittorrent search pluggins from [https://github.com/qbittorrent/search-plugins](https://github.com/qbittorrent/search-plugins) when the container starts
 
 ## Base Image ##
 
