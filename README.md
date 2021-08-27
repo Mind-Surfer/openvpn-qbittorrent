@@ -1,29 +1,52 @@
-# Alpine, OpenVPN and qBittorrent Container Image #
+# OpenVPN and qBittorrent #
 
-A very simple container that has OpenVPN and qBittorrent installed on the official latest Alpine base image. I am aware that this container is restrictive, so if it's not suitable for you there are other images out there offering more flexible options using OpenVPN and Deluge. I just happen to like qBittorrent and wanted to try creating my own container :-).
+A very simple (and small!) container image with OpenVPN and qBittorrent installed on the official latest Alpine base image.
 
-## Tags ##
+## Features ##
 
-- v3 is the latest version
-- latest is, well.. the latest version (currently v3)
+* Works with any VPN provider that can provide a OpenVPN configuration file
+* Configurable DNS Servers
+* Updated each week with relevant package and security updates
+* qBittorrent runs under a low privilage account
 
-### Package and security updates ###
+## Base Image ##
 
-The image is updated each week with relevant package and security updates.
+* Alpine
 
-## About OpenVPN ##
+## Software ##
+
+* OpenVPN
+* qBittorrent
+
+### About OpenVPN ###
 
 OpenVPN is a virtual private network (VPN) system that implements techniques to create secure point-to-point or site-to-site connections in routed or bridged configurations and remote access facilities.. [click here to see more info on wikipedia](https://en.wikipedia.org/wiki/OpenVPN)
 
-## About qBittorrent ##
+### About qBittorrent ###
 
 qBittorrent is a cross-platform free and open-source BitTorrent client.. [click here to see more info on wikipedia](https://en.wikipedia.org/wiki/QBittorrent)
 
-There is no binary version available in Alpine apk so we must use this one from [userdocs on GitHub](https://github.com/userdocs/qbittorrent-nox-static).
+***Note***
+There is no binary version of qBittorrent available in Alpine apk so we must use this one from [userdocs on GitHub](https://github.com/userdocs/qbittorrent-nox-static).
+
+## Tags ##
+
+Tag     | Description
+:-------|:-----------------
+latest  | v2.5.0
+v2.5.0  | Alpine image base
+v2.4.0  | Debian image base
+v2.3.0  | Debian image base
+v2.2.0  | Debian image base
+v2.1.0  | Debian image base
+
+## Package and Security Updates ##
+
+The image is updated each week with relevant package and security updates.
 
 ## Requirements ##
 
-The following text outlines the requirements that must be fulfilled in order to successfully run the image.
+The following text outlines the requirements that must be fulfilled in order to successfully run the container image.
 
 ### Directories ###
 
@@ -38,25 +61,23 @@ You need two directories on the host: -
 
 ### OpenVPN configuration file ###
 
-- The file must be named openvpn.conf (the name must all be lower case)
-- The file must be placed at the root of your configuration directory
+* The file must be named openvpn.conf (the name must all be lower case)
+* The file must be placed at the root of your configuration directory
 
 Example:
 
-1. I create a folder called qBittorrent in my home folder
-2. I save my Open VP configuration file into the qBittorrent folder created in the previous step
+1. I create a folder called qBittorrent in my home directory
+2. I save the Open VP configuration file into the configuration directory created in the previous step (qBittorrent)
 
 ### qBittorrent Web UI TCP/IP Port Mapping ###
 
-- You must map a TCP/IP port 8080.
-  - i.e. using docker run, the port would be mapped like this -p 8080:8080
+* You must map a TCP/IP port 8080.
+  * i.e. using docker run, the port is be mapped like this -p 8080:8080
 
 ### Volume Mapping ###
 
-You must map two directories to that you have created on the host to the container:-
-
-- Map the directory that you created for the torrents to the container volume /torrents/
-- Map the directoty that you created for the configuration to the container volume /config/
+* Map the directory that you created for the torrents to the container volume /torrents/
+* Map the directoty that you created for the configuration to the container volume /config/
 
 ***The container requires read/write access to both volumes***
 
@@ -70,10 +91,10 @@ The basic mode of operation when the container is started is as follows: -
 
 Optional environment variables: -
 
-- DNS_SERVER1
-  - A valid TCP/IP address of the DNS server you want to use.
-- DNS_SERVER2
-  - A valid TCP/IP address of the DNS server you want to use.
+* DNS_SERVER1
+  * A valid TCP/IP address of the DNS server you want to use.
+* DNS_SERVER2
+  * A valid TCP/IP address of the DNS server you want to use.
 
 If not specified, they default to using Google's public DNS servers (8.8.8.8, 8.8.4.4)
 
@@ -95,14 +116,14 @@ If not specified, they default to using Google's public DNS servers (8.8.8.8, 8.
 
 There are a couple of parameters that I would like to draw your attention too;
 
-- --device=/dev/net/tun
-- --cap-add=NET_ADMIN
+* --device=/dev/net/tun
+* --cap-add=NET_ADMIN
 
 ***These parameters are required for OpenVPN to connect. Without them, OpenVPN will not connect.***
 
 ### Accessing the qBittorrent Web UI ###
 
-When OpenVPN has established its connection, the local area network becomes inaccessible. This is by design because OpenVPN and your VPN provider use the same private address ranges that are in use on your local network. This unfortunately means that the qBittorrent Web UI is only accessible from the host (the machine where your container is running).
+When OpenVPN has established its connection, the local area network becomes inaccessible to the container. This is by design. OpenVPN and your VPN provider use the same private address ranges that are in use on your home/local network. This unfortunately means that the qBittorrent Web UI is only accessible from the host (the machine where your container is running). It is possible to work around this and create a route to your local network, but the mapping may cause a conflict between the VPN network range and your network range. Best to leave it and avoid creating problems.
 
 You can read more about this [here](https://openvpn.net/community-resources/how-to/).
 
@@ -110,6 +131,6 @@ You can read more about this [here](https://openvpn.net/community-resources/how-
 
 When you first run the container, qBittorrent is setup with the default user name and password (admin, adminadmin). I strongly advise you to change these to something more secure.
 
-If you appreciate my work, buy me coffee
+If you appreciate my work, buy me a coffee!
 
 [![If you appreciate my work, buy me coffee](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9A8T62P8DDAMC)
