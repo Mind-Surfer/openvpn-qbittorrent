@@ -2,8 +2,10 @@
 
 # Message prefix
 TIME=$(date +%T)
-PREFIX="[${TIME} INFO]:"
+PREFIX="[${TIME} INFO]: "
+RED="\033[0;31m"
+WHITE="\e[0;37m"
 
-echo "${PREFIX} VPN connection down."
+echo "${RED}${PREFIX}VPN connection down.${WHITE}"
 rm /run/up.vpn
 pkill qbittorrent-nox
