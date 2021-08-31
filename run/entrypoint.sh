@@ -103,7 +103,9 @@ if [ $privateip = $vpnip ];
           exit 2
 fi
 
-echo -e "${GREEN}${PREFIX}VPN is up! Configuring qBittorrent to use vpn interface..${WHITE}"
+echo -e "${GREEN}${PREFIX}VPN is up!${WHITE}"
+
+echo -e "${PREFIX}Configuring qBittorrent to use vpn interface.."
 sed -i 's/^Connection\\InterfaceAddress=.*$/Connection\\InterfaceAddress='"$vpnip"'/' /config/qBittorrent/config/qBittorrent.conf
 echo
 
