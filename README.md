@@ -133,6 +133,6 @@ You can read more about this [here](https://openvpn.net/community-resources/how-
 
 When you first run the container, qBittorrent is setup with the default user name and password (admin, adminadmin). I strongly advise you to change these to something more secure.
 
-If you appreciate my work, buy me a coffee!
+If you appreciate my work..
 
-[![If you appreciate my work, buy me coffee](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9A8T62P8DDAMC)
+<a href="https://www.buymeacoffee.com/mindsurfer" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" height= "60" width="217" ></a>
