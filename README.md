@@ -35,7 +35,10 @@ Bittorrent is not available in qAlpine apk. So we use the latest version provide
 
 Tag     | Description
 :-------|:-----------------
-latest  | v2.1.0
+latest  | v2.1.3
+v2.1.3  | Alpine image base
+v2.1.2  | Alpine image base
+v2.1.1  | Alpine image base
 v2.1.0  | Alpine image base
 v2.0.4  | Debian image base
 v2.0.3  | Debian image base
@@ -132,6 +135,10 @@ You can read more about this [here](https://openvpn.net/community-resources/how-
 ### qBittorrent Web UI ###
 
 When you first run the container, qBittorrent is setup with the default user name and password (admin, adminadmin). I strongly advise you to change these to something more secure.
+
+## Found a Bug Or Have a Suggestion? ##
+
+If you've found a bug or have suggestion that can improve this image, let us know by logging it [here](https://github.com/Mind-Surfer/openvpn-qbittorrent/issues/new/choose).
 
 If you appreciate my work..
 
