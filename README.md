@@ -35,7 +35,9 @@ Bittorrent is not available in qAlpine apk. So we use the latest version provide
 
 Tag     | Description
 :-------|:-----------------
-latest  | v2.1.1
+latest  | v2.1.3
+v2.1.3  | Alpine image base
+v2.1.2  | Alpine image base
 v2.1.1  | Alpine image base
 v2.1.0  | Alpine image base
 v2.0.4  | Debian image base
