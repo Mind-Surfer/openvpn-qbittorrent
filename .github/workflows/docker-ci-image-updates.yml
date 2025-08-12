@@ -23,7 +23,7 @@ jobs:
     steps:
 
     - name: Check Out Repo 
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Get the tags and history
       run: git fetch --prune --unshallow
